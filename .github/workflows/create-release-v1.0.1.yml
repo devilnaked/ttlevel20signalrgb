@@ -14,27 +14,37 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create GitHub release
+      - name: Prepare release notes
+        run: |
+          cat > release-notes.md <<'EOF'
+          ## Fixed
+
+          - Changed the default Geometry Mode to **Physical 2D**.
+          - Fixed vertical Canvas effects such as top-to-bottom and bottom-to-top waves changing the entire keyboard at once.
+          - Kept **Horizontal Sync** as an optional compatibility mode.
+          - No HID protocol, handshake, packet, or electrical-map changes.
+
+          ## Installation
+
+          Download `Thermaltake_Level20_RGB.js`, place it in the SignalRGB user plugin directory, then restart SignalRGB.
+          EOF
+
+      - name: Create or update GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if gh release view v1.0.1 >/dev/null 2>&1; then
-            echo "Release v1.0.1 already exists"
+            gh release edit v1.0.1 \
+              --target main \
+              --title "Thermaltake Level 20 RGB v1.0.1" \
+              --notes-file release-notes.md
+            gh release upload v1.0.1 Thermaltake_Level20_RGB.js --clobber
           else
             gh release create v1.0.1 \
               Thermaltake_Level20_RGB.js \
               --target main \
               --title "Thermaltake Level 20 RGB v1.0.1" \
-              --notes "## Fixed
-
-- Changed the default Geometry Mode to **Physical 2D**.
-- Fixed vertical Canvas effects such as top-to-bottom and bottom-to-top waves changing the entire keyboard at once.
-- Kept **Horizontal Sync** as an optional compatibility mode.
-- No HID protocol, handshake, packet, or electrical-map changes.
-
-## Installation
-
-Download `Thermaltake_Level20_RGB.js`, place it in the SignalRGB user plugin directory, then restart SignalRGB."
+              --notes-file release-notes.md
           fi
 
       - name: Remove one-time workflow
