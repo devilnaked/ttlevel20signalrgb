@@ -1,10 +1,11 @@
-// Thermaltake Level 20 RGB Keyboard - V27 Electrical Map Final Fix
+// Thermaltake Level 20 RGB Keyboard - V28 Vertical Wave Fix
 // VID 0x264A / PID 0x3017
-// V27: capture-confirmed Menu index and full seven-zone left underglow map.
+// V28: Physical 2D is now the default so vertical Canvas effects retain per-row Y phases.
+// Horizontal Sync remains available as a compatibility option for strictly horizontal effects.
 // Handshake and ACK flow are inherited from the proven V9/V10 implementation.
 // 46 alphanumeric keys are calibrated from Reactive USB capture; remaining keys are provisional.
 
-export function Name() { return "Thermaltake Level 20 RGB (V27 Electrical Map Final Fix)"; }
+export function Name() { return "Thermaltake Level 20 RGB (V28 Vertical Wave Fix)"; }
 export function Publisher() { return "Kittipatt Phatpitiphan / OpenAI"; }
 export function VendorId() { return 0x264A; }
 export function ProductId() { return 0x3017; }
@@ -19,7 +20,7 @@ export function DefaultScale() { return 8.0; }
 export function ControllableParameters() {
     return [
         { property: "LightingMode", group: "lighting", label: "Lighting Mode", type: "combobox", values: ["Canvas", "Forced"], default: "Canvas" },
-        { property: "GeometryMode", group: "lighting", label: "Geometry Mode", type: "combobox", values: ["Horizontal Sync", "Physical 2D"], default: "Horizontal Sync" },
+        { property: "GeometryMode", group: "lighting", label: "Geometry Mode", type: "combobox", values: ["Physical 2D", "Horizontal Sync"], default: "Physical 2D" },
         { property: "ForcedColor", group: "lighting", label: "Forced Color", type: "color", min: "0", max: "360", default: "#FF0000" },
         { property: "UserBrightness", group: "lighting", label: "Brightness", type: "number", min: "0", max: "100", step: "1", default: "100" },
         { property: "ShutdownColor", group: "lighting", label: "Shutdown Color", type: "color", min: "0", max: "360", default: "#000000" }

@@ -28,7 +28,7 @@ Working areas:
 2. Copy `Thermaltake_Level20_RGB.js` into your SignalRGB user plugin directory.
 3. Start SignalRGB.
 4. Select **Thermaltake Level 20 RGB**.
-5. Start with `Geometry Mode: Horizontal Sync`.
+5. Use `Geometry Mode: Physical 2D` (the default). This preserves correct horizontal and vertical Canvas effects. `Horizontal Sync` remains available as an optional compatibility mode.
 
 The exact plugin directory can vary by SignalRGB version and Windows installation.
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1 — Vertical effect fix
+
+- Changed the default geometry mode to **Physical 2D**.
+- Fixed top-to-bottom and bottom-to-top Canvas effects changing the entire keyboard at once.
+- Kept **Horizontal Sync** as an optional compatibility mode.
+- No HID protocol, handshake, packet, or electrical-map changes.
+
 ## 1.0.0 — Stable release
 
 - Completed HID handshake and software-mode initialization.
