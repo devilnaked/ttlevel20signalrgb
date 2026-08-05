@@ -1,0 +1,49 @@
+name: Create v1.0.1 release
+
+on:
+  push:
+    paths:
+      - .github/workflows/create-release-v1.0.1.yml
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v1.0.1 >/dev/null 2>&1; then
+            echo "Release v1.0.1 already exists"
+          else
+            gh release create v1.0.1 \
+              Thermaltake_Level20_RGB.js \
+              --target main \
+              --title "Thermaltake Level 20 RGB v1.0.1" \
+              --notes "## Fixed
+
+- Changed the default Geometry Mode to **Physical 2D**.
+- Fixed vertical Canvas effects such as top-to-bottom and bottom-to-top waves changing the entire keyboard at once.
+- Kept **Horizontal Sync** as an optional compatibility mode.
+- No HID protocol, handshake, packet, or electrical-map changes.
+
+## Installation
+
+Download `Thermaltake_Level20_RGB.js`, place it in the SignalRGB user plugin directory, then restart SignalRGB."
+          fi
+
+      - name: Remove one-time workflow
+        run: rm .github/workflows/create-release-v1.0.1.yml
+
+      - name: Commit workflow cleanup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/create-release-v1.0.1.yml
+          git commit -m "Remove one-time v1.0.1 release workflow"
+          git push
